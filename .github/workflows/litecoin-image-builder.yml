@@ -20,7 +20,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: /1_litecoin_docker
+        working-directory: 1_litecoin_docker
 
     steps:
     - name: checkout

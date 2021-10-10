@@ -1,21 +1,18 @@
 name: Litecoin Docker Image CI
 
 on:
-
   push:
-    branches: [ main ]
+    branches: [main]
     paths:
-    - 1_litecoin_docker/**
+      - 1_litecoin_docker/**
   pull_request:
-    branches: [ main ]
+    branches: [main]
     paths:
-    - 1_litecoin_docker/**
-  workflow_dispatch:  
+      - 1_litecoin_docker/**
+  workflow_dispatch:
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -23,31 +20,29 @@ jobs:
         working-directory: 1_litecoin_docker
 
     steps:
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-    - name: Login to DockerHub
-      uses: docker/login-action@v1 
-      with:
-        username: ${{ secrets.DOCKERHUB_USERNAME }}
-        password: ${{ secrets.DOCKERHUB_TOKEN }}
-    
-    - name: checkout
-      uses: actions/checkout@v2
+      - name: checkout
+        uses: actions/checkout@v2
 
-    - name: Scan current project
-      id: scan
-      uses: anchore/scan-action@v2
-      with:
-        dockerfile-path: "./Dockerfile"
-        fail-build: true        
+      - name: set output for short sha
+        id: vars
+        run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
 
-    - name: set output for short sha
-      id: vars
-      run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
-    
-    - name: Build Image
-      run: docker build . --file Dockerfile --tag ${{ secrets.DOCKERHUB_USERNAME }}/litecoin:0.18.1-${{ steps.vars.outputs.sha_short }}   
+      - name: Build Image
+        run: docker build . --file Dockerfile --tag ${{ secrets.DOCKERHUB_USERNAME }}/litecoin:0.18.1-${{ steps.vars.outputs.sha_short }}
 
-    - name: Push Image
-      run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/litecoin:0.18.1-${{ steps.vars.outputs.sha_short }}   
+        # https://anchore.com/blog/github-actions-tutorial/
+      - name: Scan Image
+        id: scan
+        uses: anchore/scan-action@v2
+        with:
+          image: ${{ secrets.DOCKERHUB_USERNAME }}/litecoin:0.18.1-${{ steps.vars.outputs.sha_short }}
+          fail-build: true
 
-      
+      - name: Push Image
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/litecoin:0.18.1-${{ steps.vars.outputs.sha_short }}

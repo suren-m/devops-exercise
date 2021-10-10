@@ -37,7 +37,7 @@ jobs:
       id: scan
       uses: anchore/scan-action@v2
       with:
-        path: "./"
+        dockerfile-path: "./Dockerfile"
         fail-build: true        
 
     - name: set output for short sha

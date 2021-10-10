@@ -33,15 +33,19 @@ jobs:
     - name: checkout
       uses: actions/checkout@v2
 
+    - name: Scan current project
+      id: scan
+      uses: anchore/scan-action@v2
+      with:
+        path: "./"
+        fail-build: true        
+
     - name: set output for short sha
       id: vars
       run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
     
     - name: Build Image
       run: docker build . --file Dockerfile --tag ${{ secrets.DOCKERHUB_USERNAME }}/litecoin:0.18.1-${{ steps.vars.outputs.sha_short }}   
-
-    - name: Scan Image
-      run: docker scan ${{ secrets.DOCKERHUB_USERNAME }}/litecoin:0.18.1-${{ steps.vars.outputs.sha_short }} --accept-license --severity medium
 
     - name: Push Image
       run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/litecoin:0.18.1-${{ steps.vars.outputs.sha_short }}   

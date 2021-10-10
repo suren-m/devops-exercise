@@ -1,6 +1,7 @@
 name: Litecoin Docker Image CI
 
 on:
+
   push:
     branches: [ main ]
     paths:
@@ -9,7 +10,7 @@ on:
     branches: [ main ]
     paths:
     - 1_litecoin_docker/**
-  
+  workflow_dispatch:  
 
 jobs:
 

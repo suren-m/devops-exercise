@@ -23,14 +23,24 @@ jobs:
         working-directory: 1_litecoin_docker
 
     steps:
+
+    - name: Login to DockerHub
+      uses: docker/login-action@v1 
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+    
     - name: checkout
       uses: actions/checkout@v2
 
-    - name: test_dir
-      run: pwd
-
-    - name: test_checkout
-      run: ls
-
+    - name: set output for short sha
+      id: vars
+      run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+    
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag surenmcode/litecoin:0.18.1-$(date +%s)
+      run: docker build . --file Dockerfile --tag ${{ secrets.DOCKERHUB_USERNAME }}/litecoin:0.18.1-${{ steps.vars.outputs.sha_short }}   
+
+    - name: Push the Docker image
+      run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/litecoin:0.18.1-${{ steps.vars.outputs.sha_short }}   
+
+      

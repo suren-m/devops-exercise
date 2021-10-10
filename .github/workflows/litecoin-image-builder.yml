@@ -1,0 +1,29 @@
+name: Litecoin Docker Image CI
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+    - 1_litecoin_docker/**
+  pull_request:
+    branches: [ main ]
+    paths:
+    - 1_litecoin_docker/**
+  
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: /1_litecoin_docker
+
+    steps:
+    - name: checkout
+      uses: actions/checkout@v2
+
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag surenmcode/litecoin:0.18.1-$(date +%s)

@@ -25,5 +25,11 @@ jobs:
     - name: checkout
       uses: actions/checkout@v2
 
+    - name: test_dir
+      run: pwd
+
+    - name: test_checkout
+      run: ls
+
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag surenmcode/litecoin:0.18.1-$(date +%s)

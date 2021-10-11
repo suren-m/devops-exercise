@@ -6,9 +6,9 @@ metadata:
     app: litecoin
 spec:
   ports:
-    - 9333
-    - 19335
-    - 19444
+    - port: 9333
+    - port: 19335
+    - port: 19444
 
   clusterIP: None
   selector:

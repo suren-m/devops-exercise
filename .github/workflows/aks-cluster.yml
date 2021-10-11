@@ -1,4 +1,5 @@
-name: aks-cluster
+name: aks cluster deployment
+
 on:
   push:
     branches:

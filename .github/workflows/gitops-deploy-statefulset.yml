@@ -1,12 +1,12 @@
+# ArgoCD app is set to auto deploy upon new releases / tags
+name: StatefulSet / K8s App Release
+
 on:
   push:
     branches: [main]
     paths:
       - 2_k8s/kustomization/**
   workflow_dispatch:
-
-# ArgoCD app is set to auto deploy upon new releases / tags
-name: Create Release
 
 jobs:
   build:

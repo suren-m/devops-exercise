@@ -4,11 +4,16 @@ metadata:
   name: litecoin-svc
   labels:
     app: litecoin
+
+# https://github.com/litecoin-project/litecoin/blob/master/doc/REST-interface.md#:~:text=The%20interface%20runs%20on%20the,and%20port%2019443%20for%20regtest.
 spec:
   ports:
     - port: 9333
+      name: mainnet
     - port: 19335
+      name: testnet
     - port: 19444
+      name: regtest
 
   clusterIP: None
   selector:

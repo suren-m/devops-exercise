@@ -33,7 +33,7 @@ The `2_k8s` directory contains the follows:
 
 ## 4. Text Manipulation problem using Bash & GNU tools
 
-* The solution `images_with_tags.sh` in `4_script_based_text_manipulation` directory demonstrates the usage of tools such as `grep`, `awk`, `sed`, `tr` to filter and display docker images in `imagename:tag` format
+* The solution `images_repo_tag_lister.sh` in `4_script_based_text_manipulation` directory demonstrates the usage of tools such as `grep`, `awk`, `sed`, `tr` to filter and display docker images in `repo:tag` format
 
 ## 5. Text Manipulation problem using Rust 
 

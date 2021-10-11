@@ -38,7 +38,8 @@ RUN mkdir -p /home/litecoin/.litecoin/data
 
 EXPOSE 9332 9333 19332 19333 19444
 WORKDIR /home/litecoin
-ENTRYPOINT ["/usr/local/bin/litecoind", "-datadir=/home/litecoin/.litecoin/data"]
+ENTRYPOINT ["/usr/local/bin/litecoind"]
+CMD ["-datadir=/home/litecoin/.litecoin/data"]
 
 #####------------------------------#####
 # References:

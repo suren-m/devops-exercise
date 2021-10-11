@@ -34,7 +34,7 @@ jobs:
         run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
 
       - name: Build Image
-        run: docker build . --file Dockerfile --tag ${{ secrets.DOCKERHUB_USERNAME }}/litecoin:0.18.1-${{ steps.vars.outputs.sha_short }}
+        run: docker build . --file Dockerfile --tag ${{ secrets.DOCKERHUB_USERNAME }}/litecoin:0.18.1-${{ steps.vars.outputs.sha_short }} --tag ${{ secrets.DOCKERHUB_USERNAME }}/litecoin:latest
 
         # https://anchore.com/blog/github-actions-tutorial/
       - name: Scan Image
@@ -46,4 +46,4 @@ jobs:
           fail-build: false
 
       - name: Push Image
-        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/litecoin:0.18.1-${{ steps.vars.outputs.sha_short }}
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/litecoin:0.18.1-${{ steps.vars.outputs.sha_short }} --tag ${{ secrets.DOCKERHUB_USERNAME }}/litecoin:latest

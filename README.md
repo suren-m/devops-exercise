@@ -23,18 +23,26 @@ The `2_k8s` directory contains the follows:
     * base - contains `statefuset.yml`
     * litecoin-exercise-demo - contains namespace resource and a couple of overrides
 * `argocd-app` - Manifest for ArgoCD app used during deployment
+![Screenshot from 2021-10-11 16-26-50](https://user-images.githubusercontent.com/3830633/136816340-9ed1c0ae-b1f9-48dc-8d8f-3fe850d91879.png)
 
 ## 3. CI / CD workflows for Deploying the K8s app
 
 * All Github Action Workflows are located in `.github/workflows` directory
 * Upon merging the pull request raised from `Step 1`(pushing the image and making updates to kustomize config), a new release is created through `gitops-deploy-statefulset.yml`
 * The ArgoCD app on `aks` cluster is set to auto sync and deploy upon new Tags / Releases to Main branch
+![Screenshot from 2021-10-11 16-24-04](https://user-images.githubusercontent.com/3830633/136815924-e574428e-27b0-4bdb-993b-d5b79d538d99.png)
+![Screenshot from 2021-10-11 16-26-03](https://user-images.githubusercontent.com/3830633/136816188-767c3477-e10d-4633-9a4e-1b14ce8636ff.png)
 
 
 ## 4. Text Manipulation problem using Bash & GNU tools
 
-* The solution `images_with_tags.sh` in `4_script_based_text_manipulation` directory demonstrates the usage of tools such as `grep`, `awk`, `sed`, `tr` to filter and display docker images in `imagename:tag` format
+* The solution `images_repo_tag_lister.sh` in `4_script_based_text_manipulation` directory demonstrates the usage of tools such as `grep`, `awk`, `sed`, `tr` to filter and display docker images in `repo:tag` format
+![Screenshot from 2021-10-11 16-20-30](https://user-images.githubusercontent.com/3830633/136815395-e27f3d72-cc16-4962-b8c9-3f7c6e278308.png)
 
 ## 5. Text Manipulation problem using Rust 
 
 * The solution in `5_rust_based_text_manipulation` solves the above problem using Rust.
+![Screenshot from 2021-10-11 16-17-49](https://user-images.githubusercontent.com/3830633/136815113-89361c47-6982-43f5-b184-078c825cd3e2.png)
+![Screenshot from 2021-10-11 16-19-27](https://user-images.githubusercontent.com/3830633/136815289-5e5a4370-d243-4800-ae1a-a1b257313d8a.png)
+
+

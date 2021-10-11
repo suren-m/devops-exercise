@@ -1,15 +1,14 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - namespace.yml
-  - ../base
+- namespace.yml
+- ../base
 patchesStrategicMerge:
-  - overrides.yml
+- overrides.yml
 namespace: devops-exercise
 commonLabels:
   environment: demo
 # kustomize edit set image surenmcode/litecoin=surenmcode/litecoin:0.18.1
 images:
-  - name: surenmcode/litecoin
-    newName: surenmcode/litecoin
-    newTag: latest
+- name: surenmcode/litecoin
+  newTag: 0.18.1-15

@@ -28,11 +28,6 @@ jobs:
       - name: Terraform version
         run: terraform version
 
-      - name: Terraform fmt
-        id: fmt
-        run: terraform fmt -recursive -check
-        continue-on-error: true
-
       # Initialize with remote state
       - name: Terraform Init
         id: init

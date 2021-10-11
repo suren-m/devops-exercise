@@ -36,6 +36,7 @@ jobs:
       - name: Build Image
         run: |
           docker build . --file Dockerfile --tag ${{ secrets.DOCKERHUB_USERNAME }}/litecoin:0.18.1-${{ steps.vars.outputs.sha_short }} 
+          docker build . --file Dockerfile --tag ${{ secrets.DOCKERHUB_USERNAME }}/litecoin:0.18.1-${{ github.run_number }}  
           docker build . --file Dockerfile --tag ${{ secrets.DOCKERHUB_USERNAME }}/litecoin:latest
 
         # https://anchore.com/blog/github-actions-tutorial/
@@ -50,4 +51,52 @@ jobs:
       - name: Push Image
         run: |
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/litecoin:0.18.1-${{ steps.vars.outputs.sha_short }} 
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/litecoin:0.18.1-${{ github.run_number }} 
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/litecoin:latest
+
+  update-k8s-manifest:
+    needs: [build-scan-and-push]
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: 2_k8s/
+    env:
+      version: github.run_number
+    steps:
+      - name: Install Kustomize
+        run: |
+          KUSTOMIZE=4.2.0
+          echo "downloading kustomize ${KUSTOMIZE}"
+          curl -sL https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv${KUSTOMIZE}/kustomize_v${KUSTOMIZE}_linux_amd64.tar.gz | \
+          tar xz && sudo mv kustomize /usr/local/bin/kustomize
+          kustomize version
+
+      - uses: actions/checkout@v2
+
+      - name: Kustomize edit for litecoin-exercise-demo
+        run: |
+          cd ./kustomization/litecoin-exercise-demo
+          kustomize edit set image ${{ secrets.DOCKERHUB_USERNAME }}/litecoin:0.18.1-${{ github.run_number }}
+
+      - name: Update kustomization
+        run: |
+          git config --global user.name 'workflow_action'
+          git config --global user.email 'workflow_action@users.noreply.github.com'
+          git commit -am "update image version on kustomization"
+
+      - name: Create Pull Request
+        id: cpr
+        uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{ secrets.PAT }}
+          labels: gitops,kustomize,argocd
+          title: Publish new version
+          branch: publish/kustomize-config
+          reviewers: suren-m
+          assignees: suren-m
+
+      - name: Check outputs
+        run: |
+          echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
+          echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"

@@ -22,10 +22,17 @@ The `2_k8s` directory contains the follows:
     * litecoin-exercise-demo - contains namespace resource and a couple of overrides
 * `argocd-app` - Manifest for ArgoCD app used during deployment
 
-## CI / CD workflows for Deploying the K8s app
+## 3. CI / CD workflows for Deploying the K8s app
 
 * All Github Action Workflows are located in `.github/workflows` directory
 * Upon merging the pull request raised from `Step 1`(pushing the image and making updates to kustomize config), a new release is created through `gitops-deploy-statefulset.yml`
 * The ArgoCD app on `aks` cluster is set to auto sync and deploy upon new Tags / Releases to Main branch
 
 
+## 4. Text Manipulation problem using Bash & GNU tools
+
+* The solution `images_with_tags.sh` in `4_script_based_text_manipulation` directory demonstrates the usage of tools such as `grep`, `awk`, `sed`, `tr` to filter and display docker images in `imagename:tag` format
+
+## 5. Text Manipulation problem using Rust 
+
+* The solution in `5_rust_based_text_manipulation` solves the above problem using Rust.

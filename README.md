@@ -6,10 +6,10 @@
 
 This repo contains the completed solution for the following:
 
-## 1. Litecoin Docker Image
+## 1. Litecoin Docker Image (build, scan, push & pull request)
 
 * Dockerfile located in `1_litecoin_docker` directory
-* The CI workflow for building, scanning and pushing the image is located in `.github/worfklows/litecoin-image-builder.yml`
+* The CI workflow for building, scanning and pushing the image is located in `.github/worfklows/litecoin-image-builder.yml` workflow
     * The above workflow will also raise a pull request to update the image version in Kustomize config.
 
 ## 2. Kubernetes Cluster and Stateful Set

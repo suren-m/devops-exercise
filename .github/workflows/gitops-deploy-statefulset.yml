@@ -1,0 +1,33 @@
+on:
+  push:
+    branches: [main]
+    paths:
+      - 2_k8s/kustomization/**
+  workflow_dispatch:
+
+# ArgoCD app is set to auto deploy upon new releases / tags
+name: Create Release
+
+jobs:
+  build:
+    name: Create Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: set output for short sha
+        id: vars
+        run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, so not need to our own
+        with:
+          tag_name: ${{ steps.vars.outputs.sha_short }}
+          release_name: Release ${{ steps.vars.outputs.sha_short }}
+          body: |
+            New Version available for ArgoCD
+          draft: false
+          prerelease: false

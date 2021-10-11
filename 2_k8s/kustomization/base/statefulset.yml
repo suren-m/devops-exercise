@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: litecoin
+spec:
+  selector:
+    matchLabels:
+      app: litecoin
+  serviceName: "litecoin-svc"
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: litecoin
+    spec:
+      terminationGracePeriodSeconds: 10
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        fsGroup: 1000
+      containers:
+        - name: litecoin
+          image: surenmcode/litecoin:latest
+          args: ["-datadir=/home/litecoin/.litecoin/data"]
+          ports:
+            - containerPort: 9332
+            - containerPort: 9333
+            - containerPort: 19332
+            - containerPort: 19333
+            - containerPort: 19444
+          volumeMounts:
+            - name: litecoin-data
+              mountPath: /home/litecoin/.litecoin/data
+          securityContext:
+            privileged: false
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - all
+            readOnlyRootFilesystem: true
+  volumeClaimTemplates: # dynamic provisioning of volumes via pvc
+    - metadata:
+        name: litecoin-data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 1Gi

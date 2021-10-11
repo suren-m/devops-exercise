@@ -1,5 +1,9 @@
 # devops-exercise
 
+![Litecoin docker image builder](https://github.com/suren-m/devops-exercises/actions/workflows/aks-cluster.yml/badge.svg) 
+![AKS cluster deployment](https://github.com/suren-m/devops-exercises/actions/workflows/gitops-deploy-statefulset.yml/badge.svg) 
+![StatefulSet release](https://github.com/suren-m/devops-exercises/actions/workflows/litecoin-image-builder.yml/badge.svg) 
+
 This repo contains the completed solution for the following:
 
 ## 1. Litecoin Docker Image

@@ -52,8 +52,8 @@ The [2_k8s](https://github.com/suren-m/devops-exercise/tree/main/2_k8s) director
   * An IAM User belonging to above Group
   * S3 backend for Remote State Management
   
-![image](https://user-images.githubusercontent.com/3830633/136964369-3b0c09dd-ac3c-4260-aefa-9022ff501b57.png)
-![image](https://user-images.githubusercontent.com/3830633/136964084-172d344f-cdc3-4705-b79f-42d1d5a9f957.png)
-![image](https://user-images.githubusercontent.com/3830633/136964153-181103c1-1e0d-4a43-bad1-f470ca21a3d3.png)
+   ![image](https://user-images.githubusercontent.com/3830633/136964369-3b0c09dd-ac3c-4260-aefa-9022ff501b57.png)
+   ![image](https://user-images.githubusercontent.com/3830633/136964084-172d344f-cdc3-4705-b79f-42d1d5a9f957.png)
+   ![image](https://user-images.githubusercontent.com/3830633/136964153-181103c1-1e0d-4a43-bad1-f470ca21a3d3.png)
 
 #### My personal DevOps repo covering Terraform, Ansible, etc. can be found here - https://github.com/suren-m/devops

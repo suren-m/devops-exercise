@@ -56,4 +56,4 @@ The `2_k8s` directory contains the follows:
 ![image](https://user-images.githubusercontent.com/3830633/136964084-172d344f-cdc3-4705-b79f-42d1d5a9f957.png)
 ![image](https://user-images.githubusercontent.com/3830633/136964153-181103c1-1e0d-4a43-bad1-f470ca21a3d3.png)
 
-#### More of my personal DevOps projects covering Terraform, Ansible, etc. can be found here - https://github.com/suren-m/devops
+#### My personal DevOps repo covering Terraform, Ansible, etc. can be found here - https://github.com/suren-m/devops

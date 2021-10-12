@@ -18,11 +18,11 @@ This repo contains the completed solution for the following:
 
 The [2_k8s](https://github.com/suren-m/devops-exercise/tree/main/2_k8s) directory contains the follows:
 
-* `aks_cluster_provisioning` - Terraform template for creating a basic aks cluster that is deployed using `aks-cluster.yaml` GitHub Action workflow.
-* `kustomization` - Directory for K8s manifests including the `statefulset` and `pvc` for litecoin
+* [aks_cluster_provisioning](https://github.com/suren-m/devops-exercise/tree/main/2_k8s/aks_cluster_provisioning) - Terraform template for creating a basic aks cluster that is deployed using `aks-cluster.yaml` GitHub Action workflow.
+* [kustomization](https://github.com/suren-m/devops-exercise/tree/main/2_k8s/kustomization) - Directory for K8s manifests including the `statefulset` and `pvc` for litecoin
     * base - contains `statefuset.yml`
     * litecoin-exercise-demo - contains namespace resource and a couple of overrides
-* `argocd-app` - Manifest for ArgoCD app used during deployment
+* [argocd-app](https://github.com/suren-m/devops-exercise/tree/main/2_k8s/argocd-app) - Manifest for ArgoCD app used during deployment
 ![Screenshot from 2021-10-11 16-45-55](https://user-images.githubusercontent.com/3830633/136818940-8fae120d-f979-4457-a849-1c4d8379329c.png)
 
 

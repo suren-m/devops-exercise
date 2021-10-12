@@ -43,4 +43,18 @@ The `2_k8s` directory contains the follows:
 ![Screenshot from 2021-10-11 16-17-49](https://user-images.githubusercontent.com/3830633/136815113-89361c47-6982-43f5-b184-078c825cd3e2.png)
 ![Screenshot from 2021-10-11 16-19-27](https://user-images.githubusercontent.com/3830633/136815289-5e5a4370-d243-4800-ae1a-a1b257313d8a.png)
 
+## 6. IAM Role, Policy, Group and User using Terraform
+
+* The directory `6_tf_iam` contains terraform templates that deploys the following:
+  * An IAM Role with a trusted entity on current account
+  * An IAM Policy that allows assuming the above IAM Role
+  * An IAM Group with above Policy Attached
+  * An IAM User belonging to above Group
+  * S3 backend for Remote State Management
+  
+![image](https://user-images.githubusercontent.com/3830633/136964369-3b0c09dd-ac3c-4260-aefa-9022ff501b57.png)
+![image](https://user-images.githubusercontent.com/3830633/136964084-172d344f-cdc3-4705-b79f-42d1d5a9f957.png)
+![image](https://user-images.githubusercontent.com/3830633/136964153-181103c1-1e0d-4a43-bad1-f470ca21a3d3.png)
+
+
 
